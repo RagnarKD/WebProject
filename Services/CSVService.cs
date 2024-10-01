@@ -1,14 +1,21 @@
 using System.Globalization;
 using CsvHelper;
+using CsvHelper.Configuration;
 
-public class CSVService : ICSVService
-{
-    public IEnumerable<T> ReadCSV<T>(Stream file)
+namespace WebProject.Services {
+    public class CSVService : ICSVService
     {
-        var reader = new StreamReader(file);
-        var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+        public IEnumerable<T> ReadCSV<T>(Stream file)
+        {
+            var reader = new StreamReader(file);
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture) {
+                HeaderValidated = null,
+                MissingFieldFound = null
+            };
+            var csv = new CsvReader(reader, config);
 
-        var records = csv.GetRecords<T>();
-        return records;
+            var records = csv.GetRecords<T>();
+            return records;
+        }
     }
 }

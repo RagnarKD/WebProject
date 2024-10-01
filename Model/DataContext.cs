@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebApp.Models {
+namespace WebProject.Model {
     public class DataContext : DbContext {
 
         public DataContext(DbContextOptions<DataContext> opts)
             : base(opts) { }
 
-        public DbSet<Translation> Products => Set<Translation>();
+        public DbSet<Translation> Translations => Set<Translation>();
     }
 }
