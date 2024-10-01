@@ -14,6 +14,21 @@ namespace WebApp.Controllers {
         }
 
         [HttpPost]
+        public IActionResult TranslateText(Translation translation) {
+            if (ModelState.IsValid) {
+
+                TempData["translationId"] = translation.TranslationId;
+                TempData["english"] = translation.English.ToString();
+                TempData["faroese"] = translation.Faroese.ToString();
+
+                return RedirectToAction(nameof(Results));
+                
+            } else {
+                return View("Base");
+            }
+        }
+
+        [HttpPost]
         public IActionResult SubmitForm(Translation translation) {
             if (ModelState.IsValid) {
 

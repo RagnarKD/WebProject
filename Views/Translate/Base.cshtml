@@ -1,7 +1,18 @@
 @{
-    Layout = "_LightLayout";
+    Layout = "_Layout";
 }
 
-<h3>
-    This is the Base action
-</h3>
+<div>
+
+    <div class="form">
+        <h3>
+            Translate
+        </h3> <br>
+
+        <form asp-action="TranslateText" method="post" id="htmlform">
+            <textarea></textarea>
+            <textarea></textarea> <br>
+            <button type="button">Translate</button>
+        </form>
+    </div>
+</div>
