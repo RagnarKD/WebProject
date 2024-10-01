@@ -6,6 +6,6 @@ namespace WebApp.Models {
         public required string English { get; set; }
         public required string Faroese { get; set; }
 
-        public long? Approval { get; set; }
+        public required long Approval { get; set; }
     }
 }

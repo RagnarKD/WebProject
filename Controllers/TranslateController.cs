@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
 
 namespace WebApp.Controllers {
@@ -14,18 +15,13 @@ namespace WebApp.Controllers {
         }
 
         [HttpPost]
-        public IActionResult TranslateText(Translation translation) {
-            if (ModelState.IsValid) {
+        public async Task<IActionResult> TranslateText(Translation translation) {
+            
+            //return View("Base", await context.Products
+            //    .OrderBy(t => t.TranslationId)
+            //    .FirstOrDefaultAsync(t => id == null || t.TranslationId == id));
 
-                TempData["translationId"] = translation.TranslationId;
-                TempData["english"] = translation.English.ToString();
-                TempData["faroese"] = translation.Faroese.ToString();
-
-                return RedirectToAction(nameof(Results));
-                
-            } else {
-                return View("Base");
-            }
+            return View("Base");
         }
 
         [HttpPost]

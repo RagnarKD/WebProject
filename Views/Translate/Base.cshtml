@@ -1,18 +1,29 @@
+@model Translation
 @{
     Layout = "_Layout";
 }
 
 <div>
-
     <div class="form">
         <h3>
             Translate
         </h3> <br>
 
         <form asp-action="TranslateText" method="post" id="htmlform">
-            <textarea></textarea>
-            <textarea></textarea> <br>
-            <button type="button">Translate</button>
+            <div class="formDiv">
+                <label> Enskt:</label> <br>
+                <textarea asp-for="English"></textarea>
+            </div>
+
+            <div class="formDiv">
+                <label> Føroyskt:</label> <br>
+                <textarea asp-for="Faroese"></textarea>
+            </div> <br>
+
+            <button type="submit">Translate</button>
+            
+            <button type="button">Approve</button>
         </form>
+
     </div>
 </div>
