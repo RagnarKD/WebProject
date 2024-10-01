@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Models;
+using WebProject.Model;
 
-namespace WebApp.Controllers {
+namespace WebProject.Controllers {
     public class TranslateController : Controller {
         public IActionResult Index() {
             return View("Base");

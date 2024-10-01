@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-namespace WebApp.Controllers {
+namespace WebProject.Controllers {
     public class HomeController : Controller {
         public IActionResult Index() {
             return View();

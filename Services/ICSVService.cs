@@ -1,4 +1,6 @@
-public interface ICSVService
-{
-   public IEnumerable<T> ReadCSV<T>(Stream file);
+namespace WebProject.Services {
+   public interface ICSVService
+   {
+      public IEnumerable<T> ReadCSV<T>(Stream file);
+   }
 }
