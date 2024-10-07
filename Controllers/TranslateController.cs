@@ -6,7 +6,7 @@ namespace WebProject.Controllers {
     public class TranslateController : Controller {
 
         public IActionResult Index() {
-            return View("Base");
+            return View("Translate");
         }
 
         private DataContext context;
@@ -28,12 +28,12 @@ namespace WebProject.Controllers {
                 await CompleteTranslation(viewModel);
                 ModelState.Clear();
 
-                return View("Base", viewModel);
+                return View("Translate", viewModel);
 
             } else {
                 Console.WriteLine("None found");
                 Console.WriteLine(viewModel.English);
-                return View("Base");
+                return View("Translate");
             }
 
         }
@@ -50,31 +50,11 @@ namespace WebProject.Controllers {
         }
 
         [HttpPost]
-        public IActionResult SubmitForm(Translation translation) {
-            if (ModelState.IsValid) {
-
-                TempData["translationId"] = translation.TranslationId;
-                TempData["english"] = translation.English.ToString();
-                TempData["faroese"] = translation.Faroese.ToString();
-
-                return RedirectToAction(nameof(Index));
-                
-            } else {
-                return View("Base");
-            }
-        }
-
-        [HttpPost]
         public IActionResult ApproveTranslation() {
             
             
 
-            return View("Base");
-        }
-
-        
-        public IActionResult RedirectToHome() {
-            return RedirectToActionPermanent("Index", "Home");
+            return View("Translate");
         }
     }
 }

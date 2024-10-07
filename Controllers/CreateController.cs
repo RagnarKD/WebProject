@@ -13,7 +13,7 @@ namespace WebProject.Controllers {
         }
 
         public IActionResult Index() {
-            return View();
+            return View("Create");
         }
     }
 }

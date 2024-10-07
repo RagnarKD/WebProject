@@ -13,7 +13,7 @@ namespace WebProject.Controllers {
         }
 
         public IActionResult Index() {
-            return View(context.Translations);
+            return View("List", context.Translations);
         }
     }
 }
