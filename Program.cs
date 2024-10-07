@@ -22,6 +22,7 @@ var app = builder.Build();
 
 app.MapDefaultControllerRoute();
 
+
 var context = app.Services.CreateScope().ServiceProvider
     .GetRequiredService<DataContext>();
 

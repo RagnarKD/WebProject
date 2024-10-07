@@ -12,8 +12,22 @@ namespace WebProject.Controllers {
             context = dbContext;
         }
 
-        public IActionResult Index() {
-            return View("List", context.Translations);
+        public IActionResult Index(int page = 1) {
+            return List(page);
+        }
+
+        public IActionResult List(int page = 1) {
+
+            if (page <= 0) {
+                page = 1;
+            }
+
+            TempData["page"] = page;
+
+            int max = page * 1000;
+            int min = max - 999;
+
+            return View("List", context.Translations.Where(t => t.TranslationId >= min && t.TranslationId <= max));
         }
     }
 }
