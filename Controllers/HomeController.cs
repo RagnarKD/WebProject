@@ -13,7 +13,19 @@ namespace WebProject.Controllers {
         }
 
         public IActionResult Index() {
-            return View(context.Translations);
+            return View();
+        }
+
+        public IActionResult RedirectToTranslate() {
+            return RedirectToActionPermanent("Index", "Translate");
+        }
+
+        public IActionResult RedirectToFullList() {
+            return RedirectToActionPermanent("Index", "FullList");
+        }
+
+        public IActionResult RedirectToCreate() {
+            return RedirectToActionPermanent(nameof(TranslateController.Index), nameof(TranslateController));
         }
     }
 }
