@@ -1,3 +1,4 @@
+@using WebProject.Controllers
 @model TranslateViewModel
 @{
     Layout = "_Layout";
@@ -9,22 +10,56 @@
             Translate
         </h3> <br>
 
-        <form asp-action="TranslateText" method="post" id="htmlform">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="formDiv">
-                <label> Enskt: </label> <br>
-                <textarea asp-for="English"></textarea>
+
+<div class="text-center">
+    <h1 class="p-3 mb-3 bg-dark text-white"> Umsett Enskt til Føroyskt </h1>
+</div>
+
+<div class="container p-2">
+    <form asp-action="TranslateText" method="post" id="htmlform">
+        <div class="row translation-row-background justify-content-center align-items-center" >
+            <div class="col-5 text-center" style="background-color: rgb(45, 45, 45); height: 450px;">
+                
+                <label class="p-1 m-2 mt-3 w-75 fs-1 fw-semibold border bg-black text-white "> Enskt </label> <br>
+                        
+                <textarea asp-for="English" class="w-75 h-75 p-3 mb-1"></textarea>
+                    
             </div>
 
-            <div class="formDiv">
-                <label> Føroyskt: </label> <br>
-                <textarea asp-for="Faroese"></textarea>
-            </div> <br>
-
-            <button type="submit">Translate</button>
+            <div class="col-5 offset-1 text-center" style="background-color: rgb(45, 45, 45); height: 450px;">
+                
+                <label class="p-1 m-2 mt-3 w-75 fs-1 fw-semibold border bg-black text-white "> Føroyskt </label> <br>
+                
+                <textarea asp-for="Faroese" class="w-75 h-75 p-3 mb-1"></textarea>
             
-            <button type="button">Approve</button>
-        </form>
+            </div>
+        </div>
 
-    </div>
+        <div class="row">
+            <div class="col p-3 text-center">
+
+                <a asp-action="index" asp-controller="Translate" class="btn p-1 m-2 w-25 fs-3 border btn-info text-white">
+                    Góðkenn umsetting
+                </a>
+
+                <button type="submit" class="p-1 m-2 w-25 fs-3 border bg-success text-white "> Umsett </button>
+
+                <a asp-action="index" asp-controller="Create" class="btn p-1 m-2 w-25 fs-3 border btn-danger text-white">
+                    Ger nýggja umsetting
+                </a>
+            </div> 
+        </div>
+    
+    </form>
+
+        <div class="row">
+            <div class="col p-3 text-center">
+
+                <a asp-action="index" asp-controller="home" class="btn p-1 m-2 w-25 fs-3 border btn-dark text-white">
+                    Aftur
+                </a>
+            </div>
+        </div>
 </div>
+
+            

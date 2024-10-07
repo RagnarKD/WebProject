@@ -4,6 +4,7 @@ using WebProject.Model;
 
 namespace WebProject.Controllers {
     public class TranslateController : Controller {
+
         public IActionResult Index() {
             return View("Base");
         }
@@ -13,7 +14,7 @@ namespace WebProject.Controllers {
         public TranslateController(DataContext dbContext) {
             context = dbContext;
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> TranslateText(TranslateViewModel viewModel) {
             
@@ -56,15 +57,24 @@ namespace WebProject.Controllers {
                 TempData["english"] = translation.English.ToString();
                 TempData["faroese"] = translation.Faroese.ToString();
 
-                return RedirectToAction(nameof(Results));
+                return RedirectToAction(nameof(Index));
                 
             } else {
                 return View("Base");
             }
         }
 
-        public IActionResult Results() {
-            return View(TempData);
+        [HttpPost]
+        public IActionResult ApproveTranslation() {
+            
+            
+
+            return View("Base");
+        }
+
+        
+        public IActionResult RedirectToHome() {
+            return RedirectToActionPermanent("Index", "Home");
         }
     }
 }
