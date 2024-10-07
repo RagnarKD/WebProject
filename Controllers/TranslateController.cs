@@ -15,13 +15,37 @@ namespace WebProject.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> TranslateText(Translation translation) {
+        public async Task<IActionResult> TranslateText(TranslateViewModel viewModel) {
             
-            //return View("Base", await context.Products
-            //    .OrderBy(t => t.TranslationId)
-            //    .FirstOrDefaultAsync(t => id == null || t.TranslationId == id));
+            if (!await context.Translations.AnyAsync(c => c.English == viewModel.English)) {
+                ModelState.AddModelError(nameof(viewModel.English), "No translation found.");
+            }
+            
+            if (ModelState.IsValid) {
+                Console.WriteLine("Translation found");
 
-            return View("Base");
+                await CompleteTranslation(viewModel);
+                ModelState.Clear();
+
+                return View("Base", viewModel);
+
+            } else {
+                Console.WriteLine("None found");
+                Console.WriteLine(viewModel.English);
+                return View("Base");
+            }
+
+        }
+
+        private async Task CompleteTranslation(TranslateViewModel viewModel) {
+            var translation = await context.Translations
+                    .OrderBy(t => t.Approval)
+                    .FirstOrDefaultAsync(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
+
+            viewModel.English = translation!.English;
+            Console.WriteLine(viewModel.English);
+            viewModel.Faroese = translation!.Faroese;
+            Console.WriteLine(viewModel.Faroese);
         }
 
         [HttpPost]

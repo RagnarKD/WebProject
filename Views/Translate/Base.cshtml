@@ -1,4 +1,4 @@
-@model Translation
+@model TranslateViewModel
 @{
     Layout = "_Layout";
 }
@@ -10,13 +10,14 @@
         </h3> <br>
 
         <form asp-action="TranslateText" method="post" id="htmlform">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="formDiv">
-                <label> Enskt:</label> <br>
+                <label> Enskt: </label> <br>
                 <textarea asp-for="English"></textarea>
             </div>
 
             <div class="formDiv">
-                <label> Føroyskt:</label> <br>
+                <label> Føroyskt: </label> <br>
                 <textarea asp-for="Faroese"></textarea>
             </div> <br>
 
