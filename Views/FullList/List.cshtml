@@ -11,11 +11,15 @@
             <a asp-action="index" asp-controller="home" class="btn p-1 m-2 w-25 fs-3 border btn-dark text-white">
                 Aftur
             </a>
+
+            <a asp-action="index" asp-controller="Create" class="btn p-1 m-2 w-25 fs-3 border btn-danger text-white">
+                Ger nýggja umseting
+            </a>
         </div>
     </div>
 </div>
 
-<br><br>
+<br>
 
 <div class="container p-2">
     <div class="row justify-content-center align-items-center">
@@ -35,7 +39,7 @@
     </div>
 </div>
 
-<br><br>
+<br>
 
 <h4 class="bg-primary text-white text-center p-2">Translation</h4>
 <table class="table table-sm table-bordered table-striped">
@@ -51,26 +55,11 @@
     <tbody>
         @foreach (Translation t in Model ?? Enumerable.Empty<Translation>()) {
             <tr>
-                <td>@t.TranslationId</td>
+                <td class="text-center">@t.TranslationId</td>
                 <td>@t.English</td>
                 <td>@t.Faroese</td>
-                <td>@t.Approval</td>
-                <td class="text-center">
-                    <a asp-action="Details" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-info">
-                        Details
-                    </a>
-                    <a asp-action="Edit" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-warning">
-                        Edit
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-danger">
-                        Delete
-                    </a>
-                </td>
+                <td class="text-center">@t.Approval</td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-action="Create" class="btn btn-primary">Create</a>
