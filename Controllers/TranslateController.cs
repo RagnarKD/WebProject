@@ -39,9 +39,12 @@ namespace WebProject.Controllers {
         }
 
         private async Task CompleteTranslation(TranslateViewModel viewModel) {
-            var translation = await context.Translations
-                    .OrderBy(t => t.Approval)
-                    .FirstOrDefaultAsync(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
+            var translations = context.Translations
+                    .OrderBy(t => t.Approval);
+            
+            ViewBag.translations = translations;
+            
+            var translation = translations.FirstOrDefault(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
 
             viewModel.English = translation!.English;
             Console.WriteLine(viewModel.English);
