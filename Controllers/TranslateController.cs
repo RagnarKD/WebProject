@@ -47,7 +47,7 @@ namespace WebProject.Controllers {
             
             ViewBag.LeftOverTranslations = translations;
             
-            var translation = translations.FirstOrDefault();
+            var translation = await translations.FirstOrDefaultAsync();
 
             viewModel.English = translation!.English;
             Console.WriteLine(viewModel.English);
@@ -58,13 +58,15 @@ namespace WebProject.Controllers {
         [HttpPost]
         public async Task<IActionResult> ApproveTranslation(long Id) {
 
-            Translation translation = context.Translations.FirstOrDefault(t => t.TranslationId == Id);
+            Translation translation = await context.Translations.FirstOrDefaultAsync(t => t.TranslationId == Id) ?? throw new ArgumentException();
 
             if (translation != null) {
 
                 translation.Approval++;
 
-                context.Translations.Update(translation);
+                await context.Translations
+                    .Where(t => t.TranslationId == translation.TranslationId)
+                    .ExecuteUpdateAsync(t => t.SetProperty(a => a.Approval, translation.Approval));
                 await context.SaveChangesAsync();
                 TranslateViewModel viewModel = new TranslateViewModel();
 

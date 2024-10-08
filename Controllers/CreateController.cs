@@ -36,8 +36,8 @@ namespace WebProject.Controllers {
 
             ModelState.Clear();
             var translation = new Translation {
-                English = viewModel.English,
-                Faroese = viewModel.Faroese,
+                English = viewModel.English!,
+                Faroese = viewModel.Faroese!,
                 Approval = 0
             };
 
