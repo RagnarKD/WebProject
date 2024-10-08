@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using WebProject.Model;
 
 namespace WebProject.Controllers {
     public class TranslateController : Controller {
+
+        //private TranslateViewModel PreviousViewModel;
+        //private IQueryable<Translation> PreviousLeftOverTranslations;
 
         public IActionResult Index() {
             return View("Translate");
@@ -28,6 +32,8 @@ namespace WebProject.Controllers {
                 await CompleteTranslation(viewModel);
                 ModelState.Clear();
 
+                //PreviousViewModel = viewModel;
+
                 return View("Translate", viewModel);
 
             } else {
@@ -40,11 +46,13 @@ namespace WebProject.Controllers {
 
         private async Task CompleteTranslation(TranslateViewModel viewModel) {
             var translations = context.Translations
-                    .OrderBy(t => t.Approval);
+                    .OrderBy(t => t.Approval)
+                    .Where(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
             
-            ViewBag.translations = translations;
+            ViewBag.LeftOverTranslations = translations;
+            //PreviousLeftOverTranslations = translations;
             
-            var translation = translations.FirstOrDefault(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
+            var translation = translations.FirstOrDefault();
 
             viewModel.English = translation!.English;
             Console.WriteLine(viewModel.English);
@@ -53,10 +61,20 @@ namespace WebProject.Controllers {
         }
 
         [HttpPost]
-        public IActionResult ApproveTranslation() {
-            
-            
+        public async Task<IActionResult> ApproveTranslation(long Id) {
 
+            Translation translation = context.Translations.FirstOrDefault(t => t.TranslationId == Id);
+
+            if (translation != null) {
+
+                translation.Approval++;
+
+                context.Translations.Update(translation);
+                await context.SaveChangesAsync();
+            }
+
+            //ViewBag.LeftOverTranslations = PreviousLeftOverTranslations;
+            
             return View("Translate");
         }
     }

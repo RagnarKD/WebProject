@@ -76,18 +76,9 @@
                 <td>@t.Faroese</td>
                 <td>@t.Approval</td>
                 <td class="text-center">
-                    <a asp-action="Details" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-info">
-                        Details
-                    </a>
-                    <a asp-action="Edit" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-warning">
-                        Edit
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@t.TranslationId"
-                            class="btn btn-sm btn-danger">
-                        Delete
-                    </a>
+                    <form asp-action="ApproveTranslation" asp-route-id="@t.TranslationId" method="post" id="htmlform">
+                        <button type="submit" class="btn btn-sm btn-info"> Góðkenn týðing </button>
+                    </form>
                 </td>
             </tr>
         }
