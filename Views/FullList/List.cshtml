@@ -17,6 +17,26 @@
 
 <br><br>
 
+<div class="container p-2">
+    <div class="row justify-content-center align-items-center">
+        
+
+        <div class="col-3 p-3 text-center ">
+            <form method="get" asp-action="List" class="m-2">
+                <div class="form-group">
+                    <label class="p-1 m-2 w-50 fs-3  border bg-black text-white "> Page </label>
+                    <input name="page" class="form-control p-1 m-2" value="@(TempData["page"])" />
+                </div>
+                <button class="btn btn-primary p-1 m-2 w-50 fs-3" type="submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
 <h4 class="bg-primary text-white text-center p-2">Translation</h4>
 <table class="table table-sm table-bordered table-striped">
     <thead>
