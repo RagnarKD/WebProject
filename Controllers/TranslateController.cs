@@ -6,9 +6,6 @@ using WebProject.Model;
 namespace WebProject.Controllers {
     public class TranslateController : Controller {
 
-        //private TranslateViewModel PreviousViewModel;
-        //private IQueryable<Translation> PreviousLeftOverTranslations;
-
         public IActionResult Index() {
             return View("Translate");
         }
@@ -32,7 +29,6 @@ namespace WebProject.Controllers {
                 await CompleteTranslation(viewModel);
                 ModelState.Clear();
 
-                //PreviousViewModel = viewModel;
 
                 return View("Translate", viewModel);
 
@@ -46,11 +42,10 @@ namespace WebProject.Controllers {
 
         private async Task CompleteTranslation(TranslateViewModel viewModel) {
             var translations = context.Translations
-                    .OrderBy(t => t.Approval)
+                    .OrderByDescending(t => t.Approval)
                     .Where(t => t.English == viewModel.English || t.Faroese == viewModel.Faroese);
             
             ViewBag.LeftOverTranslations = translations;
-            //PreviousLeftOverTranslations = translations;
             
             var translation = translations.FirstOrDefault();
 
@@ -71,10 +66,14 @@ namespace WebProject.Controllers {
 
                 context.Translations.Update(translation);
                 await context.SaveChangesAsync();
+                TranslateViewModel viewModel = new TranslateViewModel();
+
+                viewModel.English = translation.English;
+                viewModel.Faroese = translation.Faroese;
+
+                return await TranslateText(viewModel);
             }
 
-            //ViewBag.LeftOverTranslations = PreviousLeftOverTranslations;
-            
             return View("Translate");
         }
     }
