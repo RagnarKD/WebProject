@@ -1,0 +1,29 @@
+@using WebProject.Controllers
+@model Translation
+@{
+    ViewBag.Title = "ShowSelectedView";
+    Layout = "_Layout";
+}
+
+<h4 class="bg-primary text-white text-center p-2">Translation</h4>
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>English</th>
+            <th>Faroese</th>
+            <th>Approval</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Model.TranslationId</td>
+                <td>@Model.English</td>
+                <td>@Model.Faroese</td>
+                <td>@Model.Approval</td>
+                <td class="text-center">
+                </td>
+            </tr>
+    </tbody>
+</table>

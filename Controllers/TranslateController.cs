@@ -19,7 +19,7 @@ namespace WebProject.Controllers {
         public async Task<IActionResult> TranslateText(TranslateViewModel viewModel) {
             
             if (!await context.Translations.AnyAsync(c => c.English == viewModel.English || c.Faroese == viewModel.Faroese)) {
-                ModelState.AddModelError(nameof(viewModel.English), "No translation found.");
+                ModelState.AddModelError(nameof(viewModel.English), "Eingin týðing funnin.");
             }
             
             if (ModelState.IsValid) {
